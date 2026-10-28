@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "Seu ateliê de escrita",
+  "short_name": "Ateliê",
+  "description": "Seu espaço pessoal para escrever com a sua voz no LinkedIn.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#EFE4CC",
+  "theme_color": "#EFE4CC",
+  "icons": [
+    {
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

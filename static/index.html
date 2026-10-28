@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#EFE4CC" />
+    <link rel="manifest" href="../static/manifest.webmanifest" />
+    <link rel="icon" href="../static/icon.svg" type="image/svg+xml" />
+    <title>Seu ateliê de escrita</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+    <script src="../static/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#inicio" aria-label="Seu ateliê de escrita">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 25c5-12 9-12 13 0s8 12 15-5"/><path d="M10 14c4 1 7 3 9 7"/></svg></span>
+          <span><strong>Seu ateliê</strong><small>de escrita</small></span>
+        </a>
+
+        <p class="nav-label">ESPAÇO DE TRABALHO</p>
+        <nav class="main-nav" aria-label="Navegação principal">
+          <button class="nav-item active" data-view="home" aria-current="page"><span class="nav-icon">⌂</span>Visão geral</button>
+          <button class="nav-item" data-view="voice"><span class="nav-icon">✳</span>Minha voz</button>
+          <button class="nav-item" data-view="library"><span class="nav-icon">▤</span>Biblioteca</button>
+          <button class="nav-item" data-view="calendar"><span class="nav-icon">◷</span>Agenda</button>
+          <button class="nav-item" data-view="settings"><span class="nav-icon">⌘</span>Conexões</button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="note-spark" aria-hidden="true">✳</span>
+          <p>Um bom post começa no que você viveu, pensou ou percebeu.</p>
+        </div>
+
+        <div class="sidebar-footer"><span class="privacy-dot"></span>Seu espaço privado</div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="breadcrumb"><span>ESCRITA</span><span class="crumb-slash">/</span><span id="current-section">VISÃO GERAL</span></div>
+          <div class="topbar-right">
+            <span id="today-label" class="today-label"></span>
+            <span class="profile-avatar" id="avatar">✳</span>
+          </div>
+        </header>
+
+        <section class="view active" id="home-view">
+          <div class="welcome-row">
+            <div>
+              <p class="eyebrow">UM LUGAR PARA SUA PRÓXIMA IDEIA</p>
+              <h1 id="greeting">O que merece ser contado?</h1>
+              <p class="lede">Posts com a sua voz, a partir do que você realmente faz e observa.</p>
+            </div>
+            <div class="connection-pill" id="connection-pill"><span class="connection-dot"></span><span>LinkedIn ainda não conectado</span></div>
+          </div>
+
+          <div class="home-grid">
+            <section class="compose-panel panel-ink">
+              <div class="panel-heading light-heading">
+                <div><p class="eyebrow eyebrow-light">COMECE PELO QUE É REAL</p><h2>Uma ideia sua, em forma de post.</h2></div>
+                <span class="hand-drawn-mark" aria-hidden="true">↘</span>
+              </div>
+              <label class="field-label light-label" for="topic">O que aconteceu, chamou sua atenção ou está construindo?</label>
+              <textarea id="topic" class="topic-input" rows="3" placeholder="Ex.: uma decisão de interface que parecia pequena, mas mudou a experiência…"></textarea>
+              <div class="compose-bottom">
+                <label class="select-wrap" for="format-select"><span>Formato</span><select id="format-select"><option>post curto e reflexivo</option><option>aprendizado de projeto</option><option>história de bastidores</option><option>observação técnica acessível</option></select></label>
+                <button class="button button-amber" id="generate-button"><span>✳</span> Criar rascunho</button>
+              </div>
+              <button class="manual-start" id="manual-start">Prefiro começar escrevendo <span>↗</span></button>
+              <p class="form-hint" id="ai-status" aria-live="polite"></p>
+            </section>
+
+            <aside class="voice-glimpse">
+              <div class="glimpse-top"><span class="eyebrow">SEU CONTEXTO</span><button class="text-button" data-open-view="voice">Ajustar <span>↗</span></button></div>
+              <h3>Uma presença que se constrói com delicadeza.</h3>
+              <p id="context-summary">Front-end, processo criativo e o encontro entre código, animação e ilustração.</p>
+              <div class="glimpse-rule"></div>
+              <p class="glimpse-caption">Seu caderno de voz aprende com exemplos, histórias e correções.</p>
+              <div class="glimpse-count"><strong id="source-count">0</strong><span>referências suas</span></div>
+            </aside>
+          </div>
+
+          <section class="editor-panel" id="editor-panel" hidden>
+            <div class="editor-heading">
+              <div><p class="eyebrow">RASCUNHO PARA VOCÊ</p><h2>Leia em voz alta. Mude o que não parece seu.</h2></div>
+              <button class="icon-button" id="close-editor" aria-label="Fechar rascunho">×</button>
+            </div>
+            <div class="draft-layout">
+              <div class="draft-main">
+                <label class="field-label" for="draft-body">Texto do post</label>
+                <textarea id="draft-body" rows="11" class="draft-text"></textarea>
+                <div class="draft-meta"><span id="char-count">0 caracteres</span><span id="draft-save-status" aria-live="polite">Rascunho ainda não salvo</span></div>
+              </div>
+              <aside class="draft-side">
+                <label class="field-label" for="feedback-note">O que devo aprender para a próxima?</label>
+                <textarea id="feedback-note" rows="4" class="feedback-input" placeholder="Ex.: menos explicação, mais detalhe do processo…"></textarea>
+                <label class="field-label schedule-label" for="schedule-at">Agendar publicação</label>
+                <input id="schedule-at" class="date-input" type="datetime-local" />
+                <p class="schedule-note">Na Vercel gratuita, a agenda é conferida perto das 10h de Natal (variação de até 59 min); outros horários podem esperar até o dia seguinte.</p>
+                <div class="editor-actions">
+                  <button class="button button-quiet" id="copy-draft" type="button">Copiar texto</button>
+                  <button class="button button-outline" id="save-draft">Salvar rascunho</button>
+                  <button class="button button-primary" id="schedule-post">Agendar post</button>
+                  <button class="button button-quiet" id="publish-now">Publicar agora <span>↗</span></button>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <div class="lower-grid">
+            <section class="section-block upcoming-block">
+              <div class="section-heading"><div><p class="eyebrow">O QUE VEM A SEGUIR</p><h2>Na sua agenda</h2></div><button class="text-button" data-open-view="calendar">Ver agenda <span>↗</span></button></div>
+              <div id="home-posts" class="post-list compact-list"></div>
+            </section>
+            <section class="gentle-reminder">
+              <div class="reminder-mark" aria-hidden="true">✳</div>
+              <p class="eyebrow">UM LEMBRETE</p>
+              <h3>Não precisa parecer importante para ser verdadeiro.</h3>
+              <p>Uma decisão pequena, um detalhe bem observado ou algo que você mudou de ideia já pode ser um bom começo.</p>
+            </section>
+          </div>
+          <p class="data-note">Para gerar um texto, seu perfil e suas referências vão à API gratuita do Gemini; nesse plano, o Google pode usar os dados para melhorar produtos. Evite registrar informações confidenciais. A conexão do LinkedIn serve somente para publicar em seu nome.</p>
+        </section>
+
+        <section class="view" id="voice-view">
+          <div class="page-intro"><p class="eyebrow">A BASE DE TUDO</p><h1>Seu jeito de ver e contar.</h1><p class="lede">Quanto mais concreto for este retrato, mais seus rascunhos vão soar como você.</p></div>
+          <form id="profile-form" class="voice-form">
+            <div class="form-section form-section-wide"><div class="form-section-intro"><span class="section-number">01</span><div><h2>Quem está falando?</h2><p>Um contexto simples para situar sua experiência.</p></div></div>
+              <div class="form-fields two-col">
+                <label class="field-label">Como prefere ser chamado<input name="name" autocomplete="name" placeholder="Seu nome" /></label>
+                <label class="field-label">O que você faz<input name="role" placeholder="Desenvolvedor front-end" /></label>
+                <label class="field-label">Onde está<input name="location" placeholder="Natal, RN, Brasil" /></label>
+                <label class="field-label">Seu trabalho em poucas palavras<input name="about" placeholder="Código, animação e ilustração…" /></label>
+              </div>
+            </div>
+            <div class="form-section"><div class="form-section-intro"><span class="section-number">02</span><div><h2>O que faz sentido para você?</h2><p>Seus assuntos, suas pessoas, sua intenção.</p></div></div>
+              <div class="form-fields">
+                <label class="field-label">Temas sobre os quais quer conversar<textarea name="pillars" rows="3" placeholder="Assuntos e projetos que fazem parte da sua rotina"></textarea></label>
+                <label class="field-label">Seu repertório e experiência<textarea name="expertise" rows="3" placeholder="O que você sabe fazer? O que aprendeu na prática?"></textarea></label>
+                <label class="field-label">Para quem você escreve?<textarea name="audience" rows="2" placeholder="Pessoas com quem gostaria de trocar ideias"></textarea></label>
+              </div>
+            </div>
+            <div class="form-section"><div class="form-section-intro"><span class="section-number">03</span><div><h2>Sua voz, sem molde.</h2><p>As escolhas que deixam a escrita reconhecível.</p></div></div>
+              <div class="form-fields">
+                <label class="field-label">Como você quer soar?<textarea name="voice_notes" rows="3" placeholder="Ritmo, humor, proximidade, referências…"></textarea></label>
+                <label class="field-label">O que não combina com você?<textarea name="avoid" rows="3" placeholder="Clichês, exageros, palavras ou estilos que quer evitar"></textarea></label>
+              </div>
+            </div>
+            <div class="form-actions"><span id="profile-saved" class="save-status"></span><button class="button button-primary" type="submit">Guardar meu contexto <span>↗</span></button></div>
+          </form>
+        </section>
+
+        <section class="view" id="library-view">
+          <div class="page-intro"><p class="eyebrow">O CADERNO DE VOZ</p><h1>As coisas que só você sabe.</h1><p class="lede">Guarde posts antigos, decisões de projeto, pequenas histórias e aprendizados. Eles ajudam a escrita a sair do genérico.</p></div>
+          <div class="library-layout">
+            <form id="source-form" class="source-form">
+              <p class="eyebrow">ADICIONAR UMA REFERÊNCIA</p>
+              <label class="field-label" for="source-title">Um título para encontrar depois<input id="source-title" name="title" required placeholder="Ex.: como escolhi a animação da tela inicial" /></label>
+              <label class="field-label" for="source-kind">Que tipo de referência é?<select id="source-kind" name="kind"><option>história</option><option>post meu</option><option>projeto</option><option>aprendizado</option><option>ideia</option></select></label>
+              <label class="field-label" for="source-content">Conte o contexto com suas palavras<textarea id="source-content" name="content" rows="8" required placeholder="O que aconteceu? O que você pensou? O que aprendeu? Inclua só o que gostaria de usar nos seus posts."></textarea></label>
+              <button class="button button-primary" type="submit">Guardar no caderno <span>↗</span></button>
+              <p class="form-hint">Você pode colar aqui um post antigo ou uma anotação. O caderno fica privado e orienta os próximos rascunhos.</p>
+            </form>
+            <div class="source-library"><div class="section-heading"><div><p class="eyebrow">SEU MATERIAL</p><h2>Referências salvas</h2></div><span id="library-count" class="count-badge">0</span></div><div id="source-list" class="source-list"></div></div>
+          </div>
+        </section>
+
+        <section class="view" id="calendar-view">
+          <div class="page-intro"><p class="eyebrow">RITMO LEVE, PRESENÇA CONSTANTE</p><h1>Uma agenda que trabalha por você.</h1><p class="lede">Rascunhos, publicações agendadas e o que já foi ao ar, no mesmo lugar.</p></div>
+          <div class="calendar-toolbar"><div class="calendar-intro"><span class="calendar-flower">✳</span><div><strong id="scheduled-count">0 posts</strong><span>na sua fila de publicação</span></div></div><button class="button button-outline" data-open-view="home">Escrever um post <span>↗</span></button></div>
+          <div id="calendar-posts" class="post-list full-list"></div>
+        </section>
+
+        <section class="view" id="settings-view">
+          <div class="page-intro"><p class="eyebrow">CONEXÕES E PUBLICAÇÃO</p><h1>Deixe o trabalho repetitivo com a ferramenta.</h1><p class="lede">Conecte a escrita assistida e seu perfil pessoal do LinkedIn. Você controla o que vai ao ar.</p></div>
+          <form id="automation-form" class="automation-settings">
+            <div class="automation-settings-heading"><div><p class="eyebrow">PRESENÇA SEMANAL</p><h2>Deixe a semana encaminhada.</h2><p>Com o modo automático ligado, a ferramenta cria e publica sem pedir sua revisão a cada post. Ela usa seu perfil, seu caderno de voz e as referências disponíveis.</p></div><label class="switch-control"><input id="automation-enabled" type="checkbox" /><span class="switch-track"></span><span class="switch-text">Modo automático</span></label></div>
+            <div class="automation-controls">
+              <label class="field-label" for="posts-per-week">Posts por semana<select id="posts-per-week"><option value="1">1 post</option><option value="2" selected>2 posts</option><option value="3">3 posts</option><option value="4">4 posts</option><option value="5">5 posts</option></select></label>
+              <fieldset class="day-picker"><legend>Dias da publicação</legend>
+                <label><input type="checkbox" name="auto-day" value="0" /><span>Seg</span></label>
+                <label><input type="checkbox" name="auto-day" value="1" checked /><span>Ter</span></label>
+                <label><input type="checkbox" name="auto-day" value="2" /><span>Qua</span></label>
+                <label><input type="checkbox" name="auto-day" value="3" checked /><span>Qui</span></label>
+                <label><input type="checkbox" name="auto-day" value="4" /><span>Sex</span></label>
+                <label><input type="checkbox" name="auto-day" value="5" /><span>Sáb</span></label>
+                <label><input type="checkbox" name="auto-day" value="6" /><span>Dom</span></label>
+              </fieldset>
+              <label class="field-label" for="publish-time">Horário local<input id="publish-time" type="time" value="10:00" /></label>
+            </div>
+            <div class="automation-settings-footer"><p id="automation-readiness" class="form-hint" aria-live="polite">Desligado. Você ainda pode criar e agendar cada post manualmente.</p><button class="button button-primary" type="submit">Guardar ritmo <span>↗</span></button></div>
+          </form>
+          <div class="integration-list">
+            <article class="integration-card integration-ai"><div class="integration-symbol">✳</div><div class="integration-copy"><p class="eyebrow">ESCRITA ASSISTIDA</p><h2 id="ai-connection-title">IA ainda não conectada</h2><p>O texto é criado com seu perfil, as referências que você salvou e suas correções. Você pode editar tudo antes de agendar.</p><div id="ai-instructions" class="setup-steps"></div></div><span id="ai-status-badge" class="status-badge">Pendente</span></article>
+            <article class="integration-card integration-linkedin"><div class="integration-symbol">↗</div><div class="integration-copy"><p class="eyebrow">SEU PERFIL PESSOAL</p><h2 id="linkedin-connection-title">LinkedIn ainda não conectado</h2><p>A autorização usa o fluxo oficial do LinkedIn. A ferramenta só pede permissão para publicar em seu nome.</p><div class="linkedin-actions"><a class="button button-primary" id="linkedin-connect" href="/api/linkedin/connect">Conectar meu LinkedIn <span>↗</span></a><button class="text-button danger-text" id="linkedin-disconnect" hidden>Desconectar</button></div><p id="linkedin-setup-note" class="form-hint"></p></div><span id="linkedin-status-badge" class="status-badge">Pendente</span></article>
+          </div>
+          <section class="backup-strip" aria-label="Cópia de segurança">
+            <div><p class="eyebrow">SEUS DADOS</p><h2>Guarde uma cópia do seu espaço.</h2><p>Baixe perfil, referências, rascunhos e agenda. O arquivo não inclui tokens nem segredos; guarde seus textos em local privado.</p></div>
+            <button class="button button-outline" id="export-data" type="button">Baixar cópia <span>↓</span></button>
+          </section>
+          <div class="automation-note"><span class="note-spark">✳</span><div><strong id="automation-note-title">Como a automação funciona</strong><p id="automation-note-copy">No modo local, o app verifica a agenda a cada 20 segundos enquanto o computador estiver ligado.</p></div></div>
+          <p class="data-note" id="data-note-copy">No modo local, seu perfil, caderno e rascunhos ficam neste computador. Na API gratuita do Gemini, o Google pode usar os textos enviados para melhorar produtos; não inclua dados confidenciais.</p>
+        </section>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
